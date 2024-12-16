@@ -162,6 +162,22 @@ function getEventById(id) {
   });
 }
 
+function deleteEvent(id) {
+  return new Promise((resolve, reject) => {
+    Event.deleteOne({ eventId: id })
+      .then((result) => {
+        if (result.deletedCount === 0) {
+          reject(`No event found with ID: ${id}`);
+        } else {
+          resolve(`Event with ID: ${id} successfully deleted`);
+        }
+      })
+      .catch((err) => {
+        reject(`Error deleting event: ${err}`);
+      });
+  });
+}
+
 module.exports = {
   initialize,
   registerEvent,
@@ -170,4 +186,5 @@ module.exports = {
   getAllPastEvents,
   getEventById,
   updateEvent,
+  deleteEvent,
 };

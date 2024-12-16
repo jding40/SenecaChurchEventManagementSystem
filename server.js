@@ -33,10 +33,11 @@ app.use((req, res, next) => {
 function ensureStaffLogin(req, res, next) {
   if (!req.session.user) {
     res.redirect("/login");
-  } else if (req.session.user.userType === "student") {
+  } else if (req.session.user.userType === "member") {
     res.render("error", {
       user: req.session.user,
-      error: "Sorry, only staff are allowed access to this page!",
+      error:
+        "Sorry, only pastor and coordinator are allowed access to this page!",
     });
   } else {
     next();
@@ -275,6 +276,18 @@ app.get("/eventStatus/:eid", ensureStaffLogin, (req, res) => {
         user: req.session.user,
       });
     })
+    .catch((error) => res.render("error", { error, user: req.session.user }));
+});
+
+app.delete("/deleteEvent/:eid", ensureStaffLogin, (req, res) => {
+  eventManagement
+    .deleteEvent(req.params.eid)
+    .then(() =>
+      res.render("success", {
+        message: "You successfully deleted this event!",
+        user: req.session.user,
+      })
+    )
     .catch((error) => res.render("error", { error, user: req.session.user }));
 });
 
