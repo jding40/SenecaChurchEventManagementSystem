@@ -105,7 +105,7 @@
             </svg>
             <a
               href="<%= ('https://www.google.com/maps/search/?api=1&query=' + event.eventLocation).replace(/\s+/g, '+') %>"
-              ><%= event.eventLocation %></a
+              ><%= event.eventLocation %><i>(click to navigate)</i></a
             >
           </div>
           <% if (!user || user?.userType ==="member") { %>
