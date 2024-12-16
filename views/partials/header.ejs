@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Jianzhong Ding" />
+    <meta name="email" content="coca4017@hotmail.com" />
+    <title>Seneca Discipleship Church</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .text-ellipsis {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <header class="bg-indigo-600">
+      <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Top">
+        <div
+          class="w-full py-6 flex items-center justify-between border-b border-indigo-500 lg:border-none"
+        >
+          <div class="flex items-center">
+            <a href="/" class="flex items-center space-x-2">
+              <img
+                src="/img/cross.svg"
+                alt="Seneca Discipleship Church"
+                class="h-12"
+              />
+              <span class="text-2xl font-bold text-white"
+                >Seneca Discipleship Church</span
+              >
+            </a>
+            <div class="hidden ml-10 space-x-8 lg:block">
+              <a
+                href="/#latest-events"
+                class="text-base font-medium text-white hover:text-indigo-50"
+                >Events</a
+              >
+              <!-- session.user或user均可 -->
+              <% if (session.user?.userType==="coordinator" ||
+              session.user?.userType==="pastor") { %>
+              <a
+                href="/createEvent"
+                class="text-base font-medium text-white hover:text-indigo-50"
+                >Create an event</a
+              >
+              <% } %>
+            </div>
+          </div>
+          <div class="ml-10 space-x-4">
+            <% if (session.user) { %>
+            <span class="text-white"
+              >Welcome, <%= session.user?.firstName %></span
+            >
+            <a
+              href="/logout"
+              class="inline-block bg-indigo-500 py-2 px-4 border border-transparent rounded-md text-base font-medium text-white hover:bg-opacity-75"
+              >Logout</a
+            >
+            <% } else { %>
+            <div
+              class="flex flex-col space-y-2 sm:space-y-0 sm:flex-row sm:space-x-4"
+            >
+              <a
+                href="/signup"
+                class="inline-block bg-white text-indigo-600 py-2 px-2 border border-transparent rounded-md text-base font-medium hover:bg-indigo-50 whitespace-nowrap"
+                >Sign Up</a
+              >
+              <a
+                href="/login"
+                class="inline-block bg-indigo-500 py-2 px-2 border border-transparent rounded-md text-base font-medium text-white hover:bg-opacity-75 whitespace-nowrap"
+                >Sign In</a
+              >
+            </div>
+            <% } %>
+          </div>
+        </div>
+      </nav>
+    </header>
+  </body>
+</html>
