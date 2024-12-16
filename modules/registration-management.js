@@ -9,8 +9,6 @@ const registrationSchema = new Schema({
   firstName: { type: String, unique: false },
   lastName: { type: String, unique: false },
   gender: { type: String, unique: false },
-  grade: { type: Number, unique: false },
-  email: { type: String, unique: false },
   tel: { type: String, unique: false },
   eventId: { type: String, unique: false },
   topic: { type: String, unique: false },
@@ -45,7 +43,6 @@ function registerRegistration(registrationData) {
       registrationData.firstName.length > 40 ||
       registrationData.lastName.length > 40 ||
       registrationData.gender.length > 20 ||
-      registrationData.grade.length > 2 ||
       registrationData.tel.length > 20 ||
       registrationData.remarks.length > 200
     ) {
@@ -60,9 +57,7 @@ function registerRegistration(registrationData) {
           firstName: registrationData.firstName,
           lastName: registrationData.lastName,
           gender: registrationData.gender,
-          grade: +registrationData.grade,
           tel: registrationData.tel,
-          email: registrationData.email,
           remarks: registrationData.remarks,
           registrationId: num,
         };
