@@ -104,7 +104,7 @@
               />
             </svg>
             <a
-              href="<%= ('https://www.google.com/maps/place/' + event.eventLocation).replace(/\s+/g, '+') %>"
+              href="<%= ('https://www.google.com/maps/search/?api=1&query=' + event.eventLocation).replace(/\s+/g, '+') %>"
               ><%= event.eventLocation %></a
             >
           </div>
@@ -209,7 +209,7 @@
               />
             </svg>
             <a
-              href="<%= ('https://www.google.com/maps/place/' + event.eventLocation).replace(/\s+/g, '+') %>"
+              href="<%= ('https://www.google.com/maps/search/?api=1&query=' + event.eventLocation).replace(/\s+/g, '+') %>"
               ><%= event.eventLocation %></a
             >
           </div>

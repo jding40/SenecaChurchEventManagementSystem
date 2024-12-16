@@ -80,7 +80,7 @@
             <p class="text-sm text-gray-600">Location</p>
             <!-- <p class="font-semibold"><%= event.eventLocation %></p> -->
             <a
-              href="<%= ('https://www.google.com/maps/place/' + event.eventLocation).replace(/\s+/g, '+') %>"
+              href="<%= ('https://www.google.com/maps/search/?api=1&query=' + event.eventLocation).replace(/\s+/g, '+') %>"
               class="font-semibold"
               ><%= event.eventLocation %></a
             >
