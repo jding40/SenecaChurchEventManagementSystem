@@ -10,6 +10,8 @@ let Schema = mongoose.Schema;
 //用于加载.env文件中的环境变量到Node.js的process.env对象中。
 require("dotenv").config();
 
+1;
+2;
 //step A2.6
 const userSchema = new Schema({
   userId: { type: String, unique: true },
