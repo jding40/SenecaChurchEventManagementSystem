@@ -1,8 +1,8 @@
+//update in Github Workspace
 const authData = require("./modules/auth-service");
 const eventManagement = require("./modules/event-management");
 const registrationManagement = require("./modules/registration-management");
 const express = require("express");
-const Joi = require("joi"); // 导入 Joi 库
 const app = express();
 const clientSessions = require("client-sessions");
 const { format } = require("date-fns");
@@ -112,35 +112,18 @@ app.get("/signup", (req, res) => {
 });
 
 app.post("/signup", (req, res) => {
-  const schema = Joi.object({
-    userId: Joi.string().alphanum().min(3).max(30).required(),
-    passWord: Joi.string()
-      .pattern(new RegExp("^[a-zA-Z0-9]{3,30}$"))
-      .required(),
-    passWord2: Joi.ref("passWord"),
-    firstName: Joi.string().required(),
-    lastName: Joi.string().required(),
-    email: Joi.string().email().required(),
-    tel: Joi.string().optional(),
-    userType: Joi.string().valid("member", "pastor", "coordinator").required(),
-  });
-
-  const { error } = schema.validate(req.body);
-  if (error) {
-    return res.render("error", { error: error.details[0].message, user: null });
-  }
-
   authData
     .registerUser(req.body)
     .then(() => {
+      //req.session.user = { ...req.body };
       req.session.user = {
         userId: req.body.userId,
         firstName: req.body.firstName,
         userType: req.body.userType,
       };
       res.render("success", {
-        message: "Successfully registered!",
-        user: req.session.user,
+        message: "Succesfully registered!",
+        user: req.session.user, //不能用user
       });
     })
     .catch((error) =>
@@ -149,7 +132,7 @@ app.post("/signup", (req, res) => {
         user: {
           userId: req.body.userId,
           firstName: req.body.firstName,
-          lastName: req.body.lastName,
+          firstLame: req.body.firstName,
           userType: req.body.userType,
         },
       })

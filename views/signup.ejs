@@ -7,7 +7,7 @@
         Create your account
       </h2>
     </div>
-    <form class="mt-8 space-y-6" action="/signup" method="POST">
+    <form class="mt-8 space-y-6" action="/signup" method="POST" onsubmit="return validateForm()">
       <% if (error) { %>
       <div
         class="bg-red-50 border border-red-400 text-red-700 px-4 py-3 rounded relative"
@@ -132,5 +132,19 @@
     </form>
   </div>
 </div>
+<script>
+  function validateForm() {
+    const userId = document.getElementById('userId').value;
+    const firstChar = userId.charAt(0);
+
+    if (!/^[a-zA-Z]$/.test(firstChar)) {
+      alert('User ID must start with a letter.');
+      return false;
+    }
+
+    // 如果验证通过，返回 true；否则返回 false
+    return true;
+  }
+</script>
 
 <%- include('partials/footer') %>

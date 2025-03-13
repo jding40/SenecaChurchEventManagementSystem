@@ -1,21 +1,9 @@
 const mongoose = require("mongoose");
-const Joi = require("joi"); // 导入 Joi 库
+//import { startOfDay } from "date-fns";
 const { startOfDay } = require("date-fns");
 const { fromZonedTime } = require("date-fns-tz");
 let Schema = mongoose.Schema;
 require("dotenv").config();
-
-// 定义 Joi 验证模式
-const eventSchemaJoi = Joi.object({
-  eventId: Joi.string().required(),
-  imgUrl: Joi.string().uri().optional(),
-  topic: Joi.string().required(),
-  shortDesc: Joi.string().required(),
-  fullDesc: Joi.string().required(),
-  eventLocation: Joi.string().required(),
-  eventDate: Joi.date().required(),
-  eventTime: Joi.string().required(),
-});
 
 const eventSchema = new Schema({
   eventId: { type: String, unique: true },
@@ -29,10 +17,6 @@ const eventSchema = new Schema({
 });
 
 let Event; // 将在新连接上定义
-
-function validateEventData(eventData) {
-  return eventSchemaJoi.validate(eventData);
-}
 
 function initialize() {
   return new Promise(function (resolve, reject) {
@@ -85,11 +69,6 @@ function updateEvent(eventData) {
 
 function registerEvent(eventData) {
   return new Promise((resolve, reject) => {
-    const { error } = validateEventData(eventData);
-    if (error) {
-      return reject(`Validation error: ${error.details[0].message}`);
-    }
-
     const torontoTime = eventData.eventDate;
     const timeZone = "America/Toronto";
     const utcDate = fromZonedTime(torontoTime, timeZone);
