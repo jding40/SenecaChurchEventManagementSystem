@@ -42,7 +42,7 @@ function registerRegistration(registrationData) {
       registrationData.eventId.length > 10 ||
       registrationData.firstName.length > 40 ||
       registrationData.lastName.length > 40 ||
-      registrationData.gender.length > 20 ||
+      registrationData.gender?.length > 20 ||
       registrationData.tel.length > 20 ||
       registrationData.remarks.length > 200
     ) {
